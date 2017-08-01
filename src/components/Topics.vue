@@ -2,7 +2,7 @@
     <div>
         <div v-for="topic in topics" class="card">
             <div class="title">
-                <h3>{{topic.post_title}}</h3>
+                <router-link :to="{ name: 'article',params: {id: topic.ID} }" tag='h3'>{{topic.post_title}}</router-link>
             </div>
             <div class="post_content" v-html="topic.post_content"></div>
             <div class="meta">
@@ -51,6 +51,9 @@ export default {
 
         .title {
             font-size: 22px;
+            h3 {
+                cursor: pointer;
+            }
         }
         .post_content {
             margin: 10px 0;

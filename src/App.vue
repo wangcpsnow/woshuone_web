@@ -97,4 +97,6 @@ export default {
         line-height: 50px;
         color: #9aaabf;
     }
+    .main .content>div {
+    }
 </style>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Home from '../components/Home.vue'
 import About from '../components/About.vue'
 import Topics from '../components/Topics.vue'
+import Article from '../components/Article.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -11,9 +12,9 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: '/', component: Home },
-    { path: '/Topics', component: Topics }
-    // { path: '/Counter', component: Counter },
-    // { path: '/About', component: About }
+    { path: '/topics', component: Topics },
+    { path: '/article/:id(\\d+)', name: 'article', component: Article },
+    { path: '/about', component: About }
   ]
 })
 
