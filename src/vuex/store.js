@@ -7,7 +7,9 @@ Vue.use(Vuex)
 
 const defaultState = {
   topics: [],
-  count: 0
+  count: 0,
+  pageIndex: 1,
+  hasmore: true
 }
 
 const inBrowser = typeof window !== 'undefined'
@@ -17,7 +19,10 @@ const state = (inBrowser && window.__INITIAL_STATE__) || defaultState
 
 const mutations = {
   TOPICS_LIST: (state, topics) => {
-    state.topics = topics
+  	if (topics.length < 10) {
+  		state.hasmore = false;
+  	}
+    state.topics = state.topics.concat(topics);
   }
 }
 

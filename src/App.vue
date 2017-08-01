@@ -12,12 +12,51 @@
             </div>
         </div>
         <div class="main">
+            <div class="backtop" :style="{backgroundColor: ishover ? '#d5dbe7' : '#e7eaf1'}" v-show='show' @click="backtop" @mouseover='backtop_in' @mouseout='backtop_out'>TOP</div>
             <div class="content">
                 <router-view class="view"></router-view>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import $ from 'jquery'
+
+export default {
+    data () {
+        return {
+            show: false,
+            ishover: false
+        }
+    },
+    created () {
+        if(typeof window !== 'undefined') {
+            var self = this;
+            var oBody = document.body;
+            oBody.onscroll = function () {
+                if (oBody.scrollTop > 1000) {
+                    self.show = true;
+                }
+                else {
+                    self.show = false;
+                }
+            }
+        }
+    },
+    methods: {
+        backtop: function () {
+            window.scrollTo(0,0);
+        },
+        backtop_in () {
+            this.ishover = true;
+        },
+        backtop_out () {
+            this.ishover = false;
+        }
+    }
+}
+</script>
 
 <style lang="stylus">
     @import './assets/css/reset.css';
@@ -47,5 +86,15 @@
     .content{
         width:1000px;
         margin:0 auto;
+    }
+    .backtop {
+        position: fixed;
+        right: 30px; bottom: 80px;
+        width: 50px; height: 50px;
+        box-shadow: 0 1px 3px rgba(0,37,55,.05);
+        cursor: pointer;
+        text-align: center;
+        line-height: 50px;
+        color: #9aaabf;
     }
 </style>

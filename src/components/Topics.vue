@@ -10,27 +10,32 @@
                 <span class="comments"> 评论数: {{ topic.comment_count }}条</span>
             </div>
         </div>
+        <div class="loadmore">
+            <a href="javascript:void(0)" @click='getTopics' v-html="hasmore ? '加载更多...' : '加载完毕'"></a>
+        </div>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters,mapActions } from 'vuex'
 import $ from 'jquery'
-import { parseTime } from '../utils/filters'
 
 export default {
     computed: {
         ...mapGetters({
-            topics: 'getTopics'
+            topics: 'getTopics',
+            hasmore: 'getHasMore'
         })
     },
     created () {
-        // $('img').on('error', function () {
-        //     console.log($(this).attr('src'));
-        // })
     },
     asyncData ({ store }) {
         return store.dispatch(`getTopics`)
+    },
+    methods: {
+        ...mapActions([
+          'getTopics'
+        ])
     }
 }
 </script>
@@ -62,6 +67,18 @@ export default {
         .meta {
             color: #8590a6;
             font-size: 14px;
+        }
+    }
+    .loadmore {
+        text-align: center;
+        a {
+            display: inline-block;
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid silver;
+            background-color: #FFF;
+            margin: 20px 0 30px;
         }
     }
 </style>
