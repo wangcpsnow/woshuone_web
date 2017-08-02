@@ -17,21 +17,36 @@ export const getTopics = ({ commit, state }) => {
 	})
 }
 
-export const getArticle = ({ commit, state }, { id }) => {
-	state.comments = [];
+export const getArticleData = ({ commit, state }, { id }) => {
+	return Promise.all([
+		getArticle({ commit, state }, { id }),
+		getComments({ commit, state }, { id })
+	]).then(values => {
+		commit('ARTICLE', values[0]);
+		commit('COMMENTS', values[1]);
+	});
+}
+
+const getArticle = ({ commit, state }, { id }) => {
 	state.article = {};
-	request.get('/comments?comment_POST_ID=' + id).then((response) => {
-		if (response.statusText === 'OK') {
-			commit('COMMENTS', response.data);
-		}
-	}).catch((error) => {
-		console.log(error);
-	})
 	return request.get('/posts?ID=' + id).then((response) => {
 		if (response.statusText === 'OK') {
-			commit('ARTICLE', response.data.length > 0 ? response.data[0] : {})
+			// commit('ARTICLE', response.data.length > 0 ? response.data[0] : {})
+			return response.data.length > 0 ? response.data[0] : {};
 		}
 	}).catch((error) => {
 		console.log(error)
+	})
+}
+
+const getComments = ({ commit, state }, { id }) => {
+	state.comments = [];
+	return request.get('/comments?comment_POST_ID=' + id).then((response) => {
+		if (response.statusText === 'OK') {
+			// commit('COMMENTS', response.data);
+			return response.data;
+		}
+	}).catch((error) => {
+		console.log(error);
 	})
 }

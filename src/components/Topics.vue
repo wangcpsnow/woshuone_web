@@ -2,7 +2,9 @@
     <div>
         <div v-for="topic in topics" class="card">
             <div class="title">
-                <router-link :to="{ name: 'article',params: {id: topic.ID} }" tag='h3'>{{topic.post_title}}</router-link>
+                <!-- <transition :name="transition"> -->
+                    <router-link :to="{ name: 'article',params: {id: topic.ID} }" tag='h3'>{{topic.post_title}}</router-link>
+                <!-- </transition> -->
             </div>
             <div class="post_content" v-html="topic.post_content"></div>
             <div class="meta">
@@ -26,6 +28,11 @@ export default {
             topics: 'getTopics',
             hasmore: 'getHasMore'
         })
+    },
+    data () {
+        return {
+            transition: 'slide-right'
+        }
     },
     created () {
     },

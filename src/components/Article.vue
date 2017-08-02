@@ -31,7 +31,7 @@ export default {
         })
     },
 	asyncData ({ store, route: { params: { id }}}) {
-		return store.dispatch('getArticle', { id: id })
+		return store.dispatch('getArticleData', { id: id })
 	}
 }
 </script>

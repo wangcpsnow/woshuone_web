@@ -10,7 +10,7 @@ const defaultState = {
 	count: 0,
 	pageIndex: 1,
 	hasmore: true,
-	artile: {},
+	article: {},
 	comments: []
 }
 

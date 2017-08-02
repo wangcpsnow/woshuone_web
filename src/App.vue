@@ -14,7 +14,9 @@
         <div class="main">
             <div class="backtop" :style="{backgroundColor: ishover ? '#d5dbe7' : '#e7eaf1'}" v-show='show' @click="backtop" @mouseover='backtop_in' @mouseout='backtop_out'>TOP</div>
             <div class="content">
-                <router-view class="view"></router-view>
+                <transition :name="transitionName">
+                    <router-view class="view"></router-view>
+                </transition>
             </div>
         </div>
     </div>
@@ -27,7 +29,8 @@ export default {
     data () {
         return {
             show: false,
-            ishover: false
+            ishover: false,
+            transitionName: 'slide-right'
         }
     },
     created () {
@@ -41,6 +44,16 @@ export default {
                 else {
                     self.show = false;
                 }
+            }
+        }
+    },
+    watch: {
+        '$route' (to, from) {
+            if (to.path == '/') {
+                this.transitionName = 'slide-left';
+            }
+            else {
+                this.transitionName = 'slide-right';
             }
         }
     },
@@ -97,6 +110,19 @@ export default {
         line-height: 50px;
         color: #9aaabf;
     }
-    .main .content>div {
+
+
+    .view {
+        transition: all .5s cubic-bezier(.55,0,.1,1);
     }
+    .slide-left-enter, .slide-right-leave-active {  
+      opacity: 0;  
+      -webkit-transform: translate(30px, 0);  
+      transform: translate(30px, 0);  
+    }
+    .slide-left-leave-active, .slide-right-enter {  
+      opacity: 0;  
+      -webkit-transform: translate(-30px, 0);  
+      transform: translate(-30px, 0);  
+    }  
 </style>
