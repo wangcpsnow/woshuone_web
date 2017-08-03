@@ -4,6 +4,11 @@ const express = require('express')
 const favicon = require('serve-favicon')
 const resolve = file => path.resolve(__dirname, file)
 
+var bodyParser = require('body-parser');
+
+
+const Api = require('./src/api');
+
 const isProd = process.env.NODE_ENV === 'production'
 
 const app = express()
@@ -41,10 +46,13 @@ const serve = (path, cache) => express.static(resolve(path), {
   maxAge: cache && isProd ? 60 * 60 * 24 * 30 : 0
 })
 
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/dist', serve('./dist', true))
 app.use(favicon(path.resolve(__dirname, 'src/assets/imgs/logo.png')))
 app.use('/service-worker.js', serve('./dist/service-worker.js'))
+
+app.use(Api);
 
 app.get('*', (req, res) => {
   if (!renderer) {

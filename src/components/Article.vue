@@ -7,7 +7,7 @@
 	        <div class="post_content" v-html="article.post_content"></div>
 		</div>
 		<div class="comments">
-			<h3 class="title">查看评论 ({{ article.comment_count }}条)</h3>
+			<h3 class="title">查看评论 ({{ comments.length }}条)</h3>
 			<div class="comment" v-for='(comment,index) in comments'>
 				<h5>
 					{{ index + 1 }} 楼 
@@ -17,11 +17,15 @@
 				<p v-html='comment.comment_content'></p>
 			</div>
 		</div>
+		<div class="addcm">
+			<AddComment :article="article" @addcm='addcomment'></AddComment>
+		</div>
 	</div>
 </template>
 
 <script>
 import { mapGetters,mapActions } from 'vuex'
+import AddComment from './AddComment'
 
 export default {
 	computed: {
@@ -30,8 +34,16 @@ export default {
             comments: 'getComments'
         })
     },
+    components: {
+    	AddComment
+  	},
 	asyncData ({ store, route: { params: { id }}}) {
 		return store.dispatch('getArticleData', { id: id })
+	},
+	methods: {
+		addcomment (data) {
+			this.comments.push(data);
+		}
 	}
 }
 </script>
