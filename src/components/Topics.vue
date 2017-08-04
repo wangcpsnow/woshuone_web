@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div v-for="topic in topics" class="card">
+        <div v-for="topic in topics" class="topic">
             <div class="title">
                 <!-- <transition :name="transition"> -->
                     <router-link :to="{ name: 'article',params: {id: topic.ID} }" tag='h3'>{{topic.post_title}}</router-link>
                 <!-- </transition> -->
             </div>
-            <div class="post_content" v-html="topic.post_content"></div>
+            <div class="post_content md-output-container" v-html="topic.post_content"></div>
             <div class="meta">
                 <span class="ctime">{{ topic.post_modified | parseTime }}</span>
                 <span class="comments"> 评论数: {{ topic.comment_count }}条</span>
@@ -47,7 +47,7 @@ export default {
 }
 </script>
 <style lang="stylus">
-    .card {
+    .topic {
         background-color: #fff;
         padding: 16px 20px;
         margin: 10px 0;
@@ -67,7 +67,7 @@ export default {
             line-height: 1.8em;
             color: #6f6f6f;
             h1,h2,h3,h4,h5 {
-                margin: 5px 0;
+                margin: 10px 0;
                 color: #333;
             }
             a {

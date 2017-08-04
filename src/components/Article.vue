@@ -4,7 +4,7 @@
 			<div class="title">
 	            <h3>{{article.post_title}}</h3>
 	        </div>
-	        <div class="post_content" v-html="article.post_content"></div>
+	        <div class="post_content md-output-container" v-html="article.post_content"></div>
 		</div>
 		<div class="comments">
 			<h3 class="title">查看评论 ({{ comments.length }}条)</h3>

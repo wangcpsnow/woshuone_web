@@ -8,6 +8,7 @@
                 <nav>
                     <router-link to="/">首页</router-link>
                     <router-link to="/topics">发现</router-link>
+                    <router-link to="/admin" v-show="0">后台</router-link>
                 </nav>
             </div>
         </div>
@@ -72,10 +73,10 @@ export default {
 </script>
 
 <style lang="stylus">
-    @import './assets/css/reset.css';
     body {
         font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
         background-color: #f7f8fa;
+        box-sizing: content-box;
     }
     .header{
         background-color: #FFF;

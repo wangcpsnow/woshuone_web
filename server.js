@@ -6,7 +6,6 @@ const resolve = file => path.resolve(__dirname, file)
 
 var bodyParser = require('body-parser');
 
-
 const Api = require('./src/api');
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -49,6 +48,8 @@ const serve = (path, cache) => express.static(resolve(path), {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/dist', serve('./dist', true))
+app.use('/assets', serve('./src/assets', true))
+
 app.use(favicon(path.resolve(__dirname, 'src/assets/imgs/logo.png')))
 app.use('/service-worker.js', serve('./dist/service-worker.js'))
 
