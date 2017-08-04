@@ -37,11 +37,11 @@ const config = merge(base, {
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(
     // minify JS
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
+    //new webpack.optimize.UglifyJsPlugin({
+      //compress: {
+        //warnings: false
+      //}
+    //}),
     // auto generate service worker
     new SWPrecachePlugin({
       cacheId: 'vue-hn',
