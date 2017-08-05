@@ -2,7 +2,7 @@ var request = require('request');
 var express = require('express');
 var router = express.Router();
 
-router.post('/api/comments', async function (req, res, next) {
+router.post('/api/comments', function (req, res, next) {
 	request({
 		url: 'http://api.woshuone.com/comments',
 		method: 'POST',
@@ -16,7 +16,7 @@ router.post('/api/comments', async function (req, res, next) {
 	})
 })
 
-router.post('/api/posts', async function (req, res, next) {
+router.post('/api/posts', function (req, res, next) {
 	request({
 		url: 'http://api.woshuone.com/posts',
 		method: 'POST',
