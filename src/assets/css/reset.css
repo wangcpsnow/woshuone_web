@@ -50,6 +50,9 @@ table {
 }
 
 
+h1, h2, h3 ,h4 ,h5 {
+	margin: 0.5rem 0;
+}
 a {
 	text-decoration: none;
 	color: #8590a6;

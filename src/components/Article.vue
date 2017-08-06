@@ -4,6 +4,9 @@
 			<div class="title">
 	            <h3>{{article.post_title}}</h3>
 	        </div>
+	        <div class="meta">
+                <span class="ctime">{{ article.post_modified | parseTime }}</span>
+            </div>
 	        <div class="post_content md-output-container" v-html="article.post_content"></div>
 		</div>
 		<div class="comments">
@@ -60,6 +63,10 @@ export default {
 	.article {
         .title {
             font-size: 22px;
+        }
+        .meta {
+            color: #8590a6;
+            font-size: 14px;
         }
         .post_content {
             margin: 10px 0;

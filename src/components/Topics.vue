@@ -6,14 +6,14 @@
                     <router-link :to="{ name: 'article',params: {id: topic.ID} }" tag='h3'>{{topic.post_title}}</router-link>
                 <!-- </transition> -->
             </div>
-            <div class="post_content md-output-container" v-html="topic.post_content"></div>
             <div class="meta">
                 <span class="ctime">{{ topic.post_modified | parseTime }}</span>
                 <span class="comments"> 评论数: {{ topic.comment_count }}条</span>
             </div>
+            <div class="post_content md-output-container" v-html="topic.post_content"></div>
         </div>
         <div class="loadmore">
-            <a href="javascript:void(0)" @click='getTopics' v-html="hasmore ? '加载更多...' : '加载完毕'"></a>
+            <a href="javascript:void(0)" @click='getTopics' v-html="tips_more"></a>
         </div>
     </div>
 </template>
@@ -27,7 +27,10 @@ export default {
         ...mapGetters({
             topics: 'getTopics',
             hasmore: 'getHasMore'
-        })
+        }),
+        tips_more: function () {
+            return '(已加载' + this.topics.length + '条) ' + (this.hasmore ? '加载更多...' : '加载完毕');
+        }
     },
     data () {
         return {
@@ -90,5 +93,8 @@ export default {
             background-color: #FFF;
             margin: 20px 0 30px;
         }
+    }
+    .title h3 {
+        margin: 0.5rem 0;
     }
 </style>

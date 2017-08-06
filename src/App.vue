@@ -79,6 +79,9 @@ export default {
         box-sizing: content-box;
         margin: 0;padding: 0;
     }
+    a {
+        color: #8590a6;
+    }
     .header{
         background-color: #FFF;
         height: 30px;
