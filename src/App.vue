@@ -77,6 +77,7 @@ export default {
         font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
         background-color: #f7f8fa;
         box-sizing: content-box;
+        margin: 0;padding: 0;
     }
     .header{
         background-color: #FFF;
