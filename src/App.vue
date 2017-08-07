@@ -2,7 +2,7 @@
     <div id="app">
         <div class="header">
             <div class="content">
-                <router-link to="/" exact>
+                <router-link to="/" exact style="margin-left: 1rem">
                     <img class="logo" src="./assets/imgs/logo.png" alt="logo">
                 </router-link>
                 <nav>
@@ -102,7 +102,8 @@ export default {
         }
     }
     .content{
-        width:1000px;
+        width: 100%;
+        max-width: 1000px;
         margin:0 auto;
     }
     .backtop {
