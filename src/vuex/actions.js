@@ -7,6 +7,14 @@ request.defaults.baseURL = 'http://api.woshuone.com'
 var pageIndex = 0;
 
 export const getTopics = ({ commit, state }) => {
+	if (state.topics.length) { //如果已经加载过了就不另外加载了(处理每次进入文章列表自动加载更多)
+		return;
+	}
+	return getMoreTopics({ commit, state });
+}
+
+//加载更多的文章列表
+export const getMoreTopics = ({ commit, state }) => {
 	if (!state.hasmore) {
 		return;
 	}
@@ -16,13 +24,14 @@ export const getTopics = ({ commit, state }) => {
 			for (var i=0,l=res.length;i<l;i++) {
 				res[i]['post_content'] = Mdjs.md2html(res[i]['post_content']);
 			}
-			commit('TOPICS_LIST', res)
+			commit('TOPICS_LIST', res);
 		}
 	}).catch((error) => {
 		console.log(error)
 	})
 }
 
+// 加载该文章的数据(该文章内容、该文章评论、该文章分类)
 export const getArticleData = ({ commit, state }, { id }) => {
 	return Promise.all([
 		getArticle({ commit, state }, { id }),
@@ -56,7 +65,7 @@ const getArticle = ({ commit, state }, { id }) => {
 
 const getArticleTerms = ({ commit, state }, { id }) => {
 	var terms = state.articleTerms[id];
-	if (terms) {
+	if (terms) { // 如果已经加载过该文章的分类，不再请求数据了
 		return terms;
 	}
 	return request.get(`/terms/post/${id}`).then((response) => {

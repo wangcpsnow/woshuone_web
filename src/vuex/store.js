@@ -12,9 +12,7 @@ const defaultState = {
 	hasmore: true,
 	article: {},
 	comments: [],
-	articleTerms: {
-
-	}
+	articleTerms: {}
 }
 
 const inBrowser = typeof window !== 'undefined'

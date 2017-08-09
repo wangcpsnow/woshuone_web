@@ -13,7 +13,7 @@
             <div class="post_content md-output-container" v-html="topic.post_content"></div>
         </div>
         <div class="loadmore">
-            <a href="javascript:void(0)" @click='getTopics' v-html="tips_more"></a>
+            <a href="javascript:void(0)" @click='getMoreTopics' v-html="tips_more"></a>
         </div>
     </div>
 </template>
@@ -37,14 +37,13 @@ export default {
             transition: 'slide-right'
         }
     },
-    created () {
-    },
+    created () {},
     asyncData ({ store }) {
         return store.dispatch(`getTopics`)
     },
     methods: {
         ...mapActions([
-          'getTopics'
+          'getMoreTopics'
         ])
     }
 }
