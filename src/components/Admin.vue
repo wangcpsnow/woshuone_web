@@ -29,6 +29,9 @@ export default {
 			post_title: ''	
 		}
 	},
+	created () {
+		
+	},
 	methods: {
 		publish () {
 			var self = this;

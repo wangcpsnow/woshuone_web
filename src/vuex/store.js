@@ -11,7 +11,10 @@ const defaultState = {
 	pageIndex: 1,
 	hasmore: true,
 	article: {},
-	comments: []
+	comments: [],
+	articleTerms: {
+
+	}
 }
 
 const inBrowser = typeof window !== 'undefined'
@@ -31,6 +34,9 @@ const mutations = {
 	},
 	COMMENTS: (state, comments) => {
 		state.comments = comments;
+	},
+	ARTICLETERMS: (state, terms, id) => {
+		state.articleTerms[state.article.ID] = terms;
 	}
 }
 

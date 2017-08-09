@@ -8,6 +8,9 @@
                 <span class="ctime">{{ article.post_modified | parseTime }}</span>
             </div>
 	        <div class="post_content md-output-container" v-html="article.post_content"></div>
+	        <div class="tags">
+	        	<a href="javascript:void(0)" v-for='item in terms'>{{ item.name }}</a>
+	        </div>
 		</div>
 		<div class="comments">
 			<h3 class="title">查看评论 ({{ comments.length }}条)</h3>
@@ -34,7 +37,8 @@ export default {
 	computed: {
         ...mapGetters({
             article: 'getArticle',
-            comments: 'getComments'
+            comments: 'getComments',
+            terms: 'getArticleTerms'
         })
     },
     components: {
@@ -67,6 +71,16 @@ export default {
         .meta {
             color: #8590a6;
             font-size: 14px;
+        }
+        .tags {
+        	margin: 20px 0;
+        	a {
+        		color: #3e7ac2;
+        		background-color: #eef4fa;
+        		padding: 12px;
+        		margin: 0 10px;
+        		border-radius: 12px;
+        	}
         }
         .post_content {
             margin: 10px 0;

@@ -8,7 +8,7 @@
                 <nav>
                     <router-link to="/">首页</router-link>
                     <router-link to="/topics">发现</router-link>
-                    <router-link to="/admin" v-show="0">后台</router-link>
+                    <router-link to="/admin" v-show="showAdmin">后台</router-link>
                 </nav>
             </div>
         </div>
@@ -31,10 +31,15 @@ export default {
         return {
             show: false,
             ishover: false,
-            transitionName: 'slide-right'
+            transitionName: 'slide-right',
+            showAdmin: false
         }
     },
     created () {
+        var dict = this.$route.query;
+        if (dict.admin) {
+            this.showAdmin = true;
+        }
         if(typeof window !== 'undefined') {
             var self = this;
             var oBody = document.body;
