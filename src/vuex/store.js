@@ -12,7 +12,8 @@ const defaultState = {
 	hasmore: true,
 	article: {},
 	comments: [],
-	articleTerms: {}
+	articleTerms: {},
+	alltags: []
 }
 
 const inBrowser = typeof window !== 'undefined'
@@ -31,10 +32,14 @@ const mutations = {
 		state.article = article;
 	},
 	COMMENTS: (state, comments) => {
+		console.log('mutations')
 		state.comments = comments;
 	},
 	ARTICLETERMS: (state, terms, id) => {
 		state.articleTerms[state.article.ID] = terms;
+	},
+	All_TAGS: (state, tags) => {
+		state.alltags = tags;
 	}
 }
 

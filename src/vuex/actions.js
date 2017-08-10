@@ -44,6 +44,19 @@ export const getArticleData = ({ commit, state }, { id }) => {
 	});
 }
 
+export const getAllTags = ({ commit, state }) => {
+	if (state.tags && state.tags.length) {
+		return state.tags;
+	}
+	return request.get('/terms').then((response) => {
+		if (response.statusText === 'OK') {
+			commit('All_TAGS', response.data);
+		}
+	}).catch((error) => {
+		console.log(error);
+	})
+}
+
 const getArticle = ({ commit, state }, { id }) => {
 	state.article = {};
 	return request.get('/posts?ID=' + id).then((response) => {

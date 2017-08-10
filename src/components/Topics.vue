@@ -8,6 +8,7 @@
             </div>
             <div class="meta">
                 <span class="ctime">{{ topic.post_modified | parseTime }}</span>
+                <span class="author">{{ topic.author }}</span>
                 <span class="comments"> 评论数: {{ topic.comment_count }}条</span>
             </div>
             <div class="post_content md-output-container" v-html="topic.post_content"></div>
@@ -37,7 +38,6 @@ export default {
             transition: 'slide-right'
         }
     },
-    created () {},
     asyncData ({ store }) {
         return store.dispatch(`getTopics`)
     },
@@ -79,6 +79,9 @@ export default {
         .meta {
             color: #8590a6;
             font-size: 14px;
+            span {
+                margin-right: 5px;
+            }
         }
     }
     .loadmore {

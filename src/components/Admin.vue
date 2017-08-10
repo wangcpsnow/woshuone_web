@@ -6,6 +6,7 @@
 		<p class="title">
 			<label>文章标题:</label> <input v-model='post_title' type="text">
 		</p>
+		<Tags :tags='tags'></Tags>
 		<mavon-editor v-model="post_content"></mavon-editor>
 		<input type="button" value="发表" class='publish' @click="publish">
 		<link rel='stylesheet' href="/assets/css/index.css">
@@ -13,7 +14,9 @@
 </template>
 <script>
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 import $ from 'jquery'
+import Tags from './Tags.vue'
 
 var mavonEditor;
 if (typeof window != 'undefined') {
@@ -29,8 +32,16 @@ export default {
 			post_title: ''	
 		}
 	},
-	created () {
-		
+	computed: {
+		...mapGetters({
+			tags: 'getAllTags'
+		})
+	},
+	asyncData ({ store}) {
+		return store.dispatch('getAllTags')
+	},
+	components: {
+		Tags
 	},
 	methods: {
 		publish () {
@@ -48,7 +59,7 @@ export default {
 				url: '/api/posts',
 				type: "POST",
 				data: {
-					post_author: self.post_author,
+					author: self.post_author,
 					post_title: self.post_title,
 					post_content: self.post_content
 				},

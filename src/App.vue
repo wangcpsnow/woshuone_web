@@ -8,7 +8,7 @@
                 <nav>
                     <router-link to="/">首页</router-link>
                     <router-link to="/topics">发现</router-link>
-                    <router-link to="/admin" v-if="showAdmin">后台</router-link>
+                    <router-link to="/admin" v-if='showAdmin'>后台</router-link>
                 </nav>
             </div>
         </div>
@@ -105,6 +105,9 @@ export default {
                 color: #333;
             }
         }
+    }
+    select {
+        outline: none;
     }
     .content{
         width: 100%;

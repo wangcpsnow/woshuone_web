@@ -6,6 +6,7 @@
 	        </div>
 	        <div class="meta">
                 <span class="ctime">{{ article.post_modified | parseTime }}</span>
+                <span class="author">{{ article.author }}</span>
             </div>
 	        <div class="post_content md-output-container" v-html="article.post_content"></div>
 	        <div class="tags">
@@ -41,6 +42,10 @@ export default {
             terms: 'getArticleTerms'
         })
     },
+    created () {
+    	console.log('hhhhhhhh')
+        console.log(this.tags);
+    },
     components: {
     	AddComment
   	},
@@ -71,6 +76,9 @@ export default {
         .meta {
             color: #8590a6;
             font-size: 14px;
+            span {
+            	margin-right: 10px;
+            }
         }
         .tags {
         	margin: 20px 0;
