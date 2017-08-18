@@ -6,7 +6,7 @@
 		<p class="title">
 			<label>文章标题:</label> <input v-model='post_title' type="text">
 		</p>
-		<Tags :tags='tags'></Tags>
+		<Tags :tags='tags' @addtags='addTags'></Tags>
 		<mavon-editor v-model="post_content"></mavon-editor>
 		<input type="button" value="发表" class='publish' @click="publish">
 		<link rel='stylesheet' href="/assets/css/index.css">
@@ -29,7 +29,8 @@ export default {
 		return {
 			post_author: '',
 			post_content: '',
-			post_title: ''	
+			post_title: '',
+			addtags: []
 		}
 	},
 	computed: {
@@ -64,9 +65,13 @@ export default {
 					post_content: self.post_content
 				},
 				success: function (data) {
-					self.$router.push('/topics');
+					console.log(data);
+					// self.$router.push('/topics');
 				}
 			});
+		},
+		addTags (data) {
+			this.addtags = data;
 		}
 	}
 }

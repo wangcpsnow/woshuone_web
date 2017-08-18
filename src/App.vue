@@ -87,6 +87,9 @@ export default {
     a {
         color: #8590a6;
     }
+    li {
+        list-style: none;
+    }
     .header{
         background-color: #FFF;
         height: 30px;

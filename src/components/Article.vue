@@ -43,8 +43,7 @@ export default {
         })
     },
     created () {
-    	console.log('hhhhhhhh')
-        console.log(this.tags);
+        // console.log(this.tags);
     },
     components: {
     	AddComment
