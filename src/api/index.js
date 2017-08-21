@@ -25,7 +25,21 @@ router.post('/api/posts', function (req, res, next) {
 		if (response.statusCode === 200 && !error) {
 			res.send(response.body);
 		} else {
-			res.send('error');
+			res.status(400).send(response.body);
+		}
+	})
+})
+
+router.post('/api/addterms', function (req, res, next) {
+	request({
+		url: 'http://api.woshuone.com/addterms',
+		method: 'POST',
+		json: req.body
+	}, function (error, response, body) {
+		if (response.statusCode === 200 && !error) {
+			res.send(response.body);
+		} else {
+			res.status(400).send(response.body);
 		}
 	})
 })

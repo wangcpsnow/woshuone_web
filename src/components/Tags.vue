@@ -37,7 +37,13 @@ export default {
 		addtag (e) {
 			var $option = $(e.target).find('option:selected'),
 				term_id = $option.attr('term_id'),
-				name = $option.attr('name');
+				name = $option.attr('name'),
+				tags = this.addtags;
+			for (var i=0,l=tags.length;i<l;i++) {
+				if (tags[i].id === term_id) {
+					return;
+				}
+			}
 			if (term_id) {
 				this.addtags.push({
 					"name": name,

@@ -32,7 +32,7 @@ const mutations = {
 		state.article = article;
 	},
 	COMMENTS: (state, comments) => {
-		console.log('mutations')
+		// console.log('mutations')
 		state.comments = comments;
 	},
 	ARTICLETERMS: (state, terms, id) => {

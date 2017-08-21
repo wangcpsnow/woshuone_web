@@ -9,7 +9,7 @@
             <div class="meta">
                 <span class="ctime">{{ topic.post_modified | parseTime }}</span>
                 <span class="author">{{ topic.author }}</span>
-                <span class="comments"> 评论数: {{ topic.comment_count }}条</span>
+                <!-- <span class="comments"> 评论数: {{ topic.comment_count }}条</span> -->
             </div>
             <div class="post_content md-output-container" v-html="topic.post_content"></div>
         </div>

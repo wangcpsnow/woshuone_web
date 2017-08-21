@@ -4,6 +4,11 @@
 		<p class="author center">王昌龄</p>
 		<p class="center">青海长云暗雪山，孤城遥望玉门关。</p>
 		<p class="center">黄沙百战穿金甲，不破楼兰终不还。</p>
+		<br>	
+		<br>	
+		<br>	
+		<br>	
+		<h3 style='margin-left: 60px'>据说,这个网站有一个彩蛋,来开始寻找吧。。。</h3>
 	</div>
 </template>
 
