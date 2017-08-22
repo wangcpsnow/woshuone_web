@@ -6,6 +6,12 @@
 		<p class="title">
 			<label>文章标题:</label> <input v-model='post_title' type="text">
 		</p>
+		<form action="/api/upload" method="post" enctype="multipart/form-data">
+		    <h2>单图上传</h2>
+		    <input type="file" name="imgFile">
+		    <input type="button" value="提交" @click="upload($event)">
+		</form>
+
 		<Tags :tags='tags' @addtags='addTags'></Tags>
 		<mavon-editor v-model="post_content"></mavon-editor>
 		<input type="button" value="发表" class='publish' @click="publish">
@@ -94,6 +100,22 @@ export default {
 		},
 		addTags (data) {
 			this.addtags = data;
+		},
+		upload (e) {
+			var files = $(e.target).parents('form').find('input[type=file]').prop('files');
+			var data = new FormData();
+			data.append('imgFile', files[0]);
+			$.ajax({
+				url: '/api/upload',
+				type: 'POST',
+				data: data,
+				cache: false,
+				processData: false,
+				contentType: false,
+				success: function () {
+
+				}
+		  	});
 		}
 	}
 }
