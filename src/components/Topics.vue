@@ -1,102 +1,113 @@
 <template>
-    <div>
-        <div v-for="topic in topics" class="topic">
-            <div class="title">
-                <!-- <transition :name="transition"> -->
-                    <router-link :to="{ name: 'article',params: {id: topic.ID} }" tag='h3'>{{topic.post_title}}</router-link>
-                <!-- </transition> -->
-            </div>
-            <div class="meta">
-                <span class="ctime">{{ topic.post_modified | parseTime }}</span>
-                <span class="author">{{ topic.author }}</span>
-                <!-- <span class="comments"> 评论数: {{ topic.comment_count }}条</span> -->
-            </div>
-            <div class="post_content md-output-container" v-html="topic.post_content"></div>
-        </div>
-        <div class="loadmore">
-            <a href="javascript:void(0)" @click='getMoreTopics' v-html="tips_more"></a>
-        </div>
-    </div>
+	<div class="topics">
+		<ul class="tags">
+			<li v-for='tag in tags' :class="{'active': tag.term_id == active_id}">
+				<a v-bind="{href: '#' + tag.term_id}" @click='changeTag(tag.term_id)'>{{ tag.name }}</a>
+			</li>
+		</ul>
+		<ul class="articles">
+			<li v-if='loading' class="loading">
+				<img src="../assets/imgs/loading.gif" alt=""> loading...
+			</li>
+			<li v-for='article in articles'>
+				<span class="ctime">{{ article.post_modified | parseTime }}</span>
+				<a v-bind='{href: "/article/" + article.ID}'>{{ article.post_title }}</a>
+			</li>
+		</ul>
+	</div>
 </template>
 
 <script>
-import { mapGetters,mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import $ from 'jquery'
 
 export default {
-    computed: {
-        ...mapGetters({
-            topics: 'getTopics',
-            hasmore: 'getHasMore'
-        }),
-        tips_more: function () {
-            return '(已加载' + this.topics.length + '条) ' + (this.hasmore ? '加载更多...' : '加载完毕');
-        }
-    },
-    data () {
-        return {
-            transition: 'slide-right'
-        }
-    },
-    asyncData ({ store }) {
-        return store.dispatch(`getTopics`)
-    },
-    methods: {
-        ...mapActions([
-          'getMoreTopics'
-        ])
-    }
+	data () {
+		return {
+			articles: [],
+			loading: true,
+			active_id: ''
+		}
+	},
+	computed: {
+		...mapGetters({
+			tags: 'getAllTags'
+		})
+	},
+	asyncData ({ store}) {
+		return store.dispatch('getAllTags')
+	},
+	mounted () {
+		this.getArticles();
+	},
+	methods: {
+		changeTag (term_id) {
+			var self = this;
+			setTimeout(function () {
+				if (self.active_id != term_id) {
+					self.getArticles();
+				}
+			}, 100);
+		},
+		getArticles () {
+			var hash = location.hash || '#1',
+				tag_id = hash.replace('#', ''),
+				self = this;
+			self.active_id = tag_id;
+			$.ajax({
+				url: '/api/posts/terms/' + tag_id,
+				type: "GET",
+				success (data) {
+					if (typeof data == 'string') {
+						data = JSON.parse(data);
+					}
+					self.articles = data;
+					self.loading = false;
+				}
+			});
+		}
+	}
 }
 </script>
-<style lang="stylus">
-    .topic {
-        background-color: #fff;
-        padding: 16px 20px;
-        margin: 10px 0;
-        border: 1px solid #e7eaf1;
-        border-radius: 2px;
-        box-shadow: 0 1px 3px rgba(0,37,55,.05);
-        overflow: hidden; 
 
-        .title {
-            font-size: 22px;
-            h3 {
-                cursor: pointer;
-            }
+<style lang="stylus" scoped>
+	.topics {
+		background-color: #fff;
+		padding: 16px 20px;
+        margin: 10px 0;
+        .tags {
+        	overflow: hidden;
+        	padding-bottom: 10px;
+        	border-bottom: 1px solid silver;
+        	li {
+        		float: left;
+        		border: 1px solid silver;
+        		border-radius: 6px;
+        		margin: 5px 10px;
+        		line-height: 24px;
+        		padding: 0 10px;
+        	}
+        	li.active {
+        		background-color: #268aef;
+        		border-color: #268aef;
+        		a {
+        			color: #FFF;
+        		}
+        	}
         }
-        .post_content {
-            margin: 10px 0;
-            line-height: 1.8em;
-            color: #6f6f6f;
-            h1,h2,h3,h4,h5 {
-                margin: 10px 0;
-                color: #333;
-            }
-            a {
-                text-decoration: underline;
-            }
+        .articles {
+			.loading {
+				text-align: center;
+				img {
+					vertical-align: middle;
+					margin-right: 5px;
+				}
+			}
+			.ctime {
+				float: right;
+				font-size: 12px;
+				color: silver;
+			}
         }
-        .meta {
-            color: #8590a6;
-            font-size: 14px;
-            span {
-                margin-right: 5px;
-            }
-        }
-    }
-    .loadmore {
-        text-align: center;
-        a {
-            display: inline-block;
-            width: 200px;
-            height: 40px;
-            line-height: 40px;
-            border: 1px solid silver;
-            background-color: #FFF;
-            margin: 20px 0 30px;
-        }
-    }
-    .title h3 {
-        margin: 0.5rem 0;
-    }
+	}
 </style>

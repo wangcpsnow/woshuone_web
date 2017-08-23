@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Home from '../components/Home.vue'
 import About from '../components/About.vue'
+import Explore from '../components/Explore.vue'
 import Topics from '../components/Topics.vue'
 import Article from '../components/Article.vue'
 import Admin from '../components/Admin.vue'
@@ -14,6 +15,7 @@ const router = new VueRouter({
 	base: __dirname,
 	routes: [
 		{ path: '/', component: Home },
+		{ path: '/explore', component: Explore },
 		{ path: '/topics', component: Topics },
 		{ path: '/article/:id(\\d+)', name: 'article', component: Article },
 		{ path: '/about', component: About },

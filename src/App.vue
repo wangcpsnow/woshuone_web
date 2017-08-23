@@ -7,7 +7,8 @@
                 </router-link>
                 <nav>
                     <router-link to="/">首页</router-link>
-                    <router-link to="/topics">发现</router-link>
+                    <router-link to="/explore">发现</router-link>
+                    <router-link to="/topics">话题</router-link>
                     <router-link to="/admin" v-if='showAdmin'>后台</router-link>
                 </nav>
             </div>

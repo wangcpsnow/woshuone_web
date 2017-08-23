@@ -94,5 +94,20 @@ router.post('/api/upload', upload.single('imgFile'), function (req, res, next) {
 	res.send(imgDomain + filepath);
 })
 
+router.get('/api/*', function (req, res, next) {
+	var url = req.originalUrl;
+	url = url.replace('/api', '');
+	request({
+		url: 'http://api.woshuone.com' + url,
+		method: 'GET'
+	}, function (error, response, body) {
+		if (response.statusCode === 200 && !error) {
+			res.send(JSON.parse(response.body));
+		} else {
+			res.status(400).send(response.body);
+		}
+	})
+})
+
 
 module.exports = router;
