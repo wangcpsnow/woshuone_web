@@ -10,7 +10,7 @@
             </div>
 	        <div class="post_content md-output-container" v-html="article.post_content"></div>
 	        <div class="tags">
-	        	<a href="javascript:void(0)" v-for='item in terms'>{{ item.name }}</a>
+	        	<a v-bind='{href: "/topics/#" + item.term_id}' v-for='item in terms'>{{ item.name }}</a>
 	        </div>
 		</div>
 		<div class="comments">
