@@ -6,6 +6,7 @@
 	        </div>
 	        <div class="meta">
                 <span class="ctime">{{ article.post_modified | parseTime }}</span>
+                <span class="heats">热度: {{ article.heats }}</span>
                 <span class="author">{{ article.author }}</span>
             </div>
 	        <div class="post_content md-output-container" v-html="article.post_content"></div>
