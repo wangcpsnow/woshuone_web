@@ -21,6 +21,11 @@
                 </transition>
             </div>
         </div>
+        <div class="footer">
+            <div class="content">
+                <p>版权所有 © All Rights Reserved 2015-2017 woshuone.com</p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -128,7 +133,16 @@ export default {
         line-height: 50px;
         color: #9aaabf;
     }
-
+    .footer {
+        background-color: #FFF;
+        padding: 10px 0;
+        margin-top: 50px;
+        font-size: 13px;
+        color: silver;
+        p {
+            margin: 0;
+        }
+    }
 
     .view {
         transition: all .5s cubic-bezier(.55,0,.1,1);
