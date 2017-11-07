@@ -5,16 +5,16 @@
 				<h3 class="title">热门分类</h3>
 				<ul>
 					<li>
-						<a href="/topics#4">JS</a>
+						<router-link :to="{ path: '/topics#4' }" tag='a'>JS</router-link>
 					</li>
 					<li>
-						<a href="/topics#5">CSS</a>
+						<router-link :to="{ path: '/topics#5' }" tag='a'>CSS</router-link>
 					</li>
 					<li>
-						<a href="/topics#13">GIT</a>
+						<router-link :to="{ path: '/topics#13' }" tag='a'>GIT</router-link>
 					</li>
 					<li>
-						<a href="/topics#23">那些年踩的坑</a>
+						<router-link :to="{ path: '/topics#23' }" tag='a'>那些年踩的坑</router-link>
 					</li>
 				</ul>
 			</div>
