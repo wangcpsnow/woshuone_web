@@ -50,7 +50,7 @@ export default {
 			}, 100);
 		},
 		getArticles () {
-			var hash = location.hash || '#1',
+			var hash = location.hash || '#2',
 				tag_id = hash.replace('#', ''),
 				self = this;
 			self.active_id = tag_id;
