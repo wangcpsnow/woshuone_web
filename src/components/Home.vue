@@ -44,7 +44,7 @@
 					<router-link :to="{ name: 'article',params: {id: topic.ID} }" tag='a'>{{topic.post_title}}</router-link>
 				</li>
 				<li>
-					<a href="/explore">更多文章</a>
+					<router-link :to="{ path: '/explore' }" tag='a'>更多文章</router-link>
 				</li>
 			</ul>
 		</div>
