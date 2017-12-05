@@ -59,7 +59,8 @@ export default {
 	}
 }
 </script>
-<style lang="stylus" scoped>
+
+<style lang="stylus">
 	.article,.comments {
 		background-color: #FFF;
 		padding: 16px 20px;
@@ -101,6 +102,10 @@ export default {
             a {
                 text-decoration: underline;
             }
+            img {
+	        	width: 60%;
+	        	margin: 0 20%;
+	        }
         }
 	}
 	.comments {
