@@ -75,6 +75,10 @@ export default {
             a {
                 text-decoration: underline;
             }
+            img {
+                width: 60%;
+                margin: 0 20%;
+            }
         }
         .meta {
             color: #8590a6;
