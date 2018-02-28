@@ -1,8 +1,9 @@
 import request from 'axios'
 
 var Mdjs = require('md-js');
+var baseURL = 'http://api.woshuone.com';
 
-request.defaults.baseURL = 'http://api.woshuone.com'
+// request.defaults.baseURL = 'http://api.woshuone.com'
 
 var pageIndex = 0;
 
@@ -18,7 +19,7 @@ export const getMoreTopics = ({ commit, state }) => {
 	if (!state.hasmore) {
 		return;
 	}
-	return request.get('/posts?post_status=publish&pageIndex=' + (state.pageIndex++)).then((response) => {
+	return request.get(baseURL + '/posts?post_status=publish&pageIndex=' + (state.pageIndex++)).then((response) => {
 		if (response.statusText === 'OK') {
 			var res = response.data;
 			for (var i=0,l=res.length;i<l;i++) {
@@ -48,7 +49,7 @@ export const getAllTags = ({ commit, state }) => {
 	if (state.tags && state.tags.length) {
 		return state.tags;
 	}
-	return request.get('/terms').then((response) => {
+	return request.get(`${baseURL}/terms`).then((response) => {
 		if (response.statusText === 'OK') {
 			commit('All_TAGS', response.data);
 		}
@@ -59,7 +60,7 @@ export const getAllTags = ({ commit, state }) => {
 
 const getArticle = ({ commit, state }, { id }) => {
 	state.article = {};
-	return request.get('/posts?ID=' + id).then((response) => {
+	return request.get(`${baseURL}/posts?ID=${id}`).then((response) => {
 		if (response.statusText === 'OK') {
 			// commit('ARTICLE', response.data.length > 0 ? response.data[0] : {})
 			if (response.data.length > 0) {
@@ -81,7 +82,7 @@ const getArticleTerms = ({ commit, state }, { id }) => {
 	if (terms) { // 如果已经加载过该文章的分类，不再请求数据了
 		return terms;
 	}
-	return request.get(`/terms/post/${id}`).then((response) => {
+	return request.get(`${baseURL}/terms/post/${id}`).then((response) => {
 		if (response.statusText === 'OK') {
 			return response.data;
 		}
@@ -92,7 +93,7 @@ const getArticleTerms = ({ commit, state }, { id }) => {
 
 const getComments = ({ commit, state }, { id }) => {
 	state.comments = [];
-	return request.get('/comments?comment_POST_ID=' + id).then((response) => {
+	return request.get(`${baseURL}/comments?comment_POST_ID=${id}`).then((response) => {
 		if (response.statusText === 'OK') {
 			// commit('COMMENTS', response.data);
 			return response.data;

@@ -5,7 +5,7 @@
 			<li v-for="tag in addtags">
 				<i>{{ tag.name }}</i>
 				<a href="javascript:void(0)" @click="rmTag(tag)">x</a>
-				
+
 			</li>
 			<a href="javascript:void(0)" v-if='!addtags.length'>未选择标签</a>
 		</ul>
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import $ from 'jquery'
-	
+// import $ from 'jquery'
+
 export default {
 	props: ['tags'],
 	data () {
@@ -29,9 +29,6 @@ export default {
 		}
 	},
 	created () {
-		var $wrap = $('tags_wrap'),
-			$tags = $wrap.find('.tags'),
-			$sele = $wrap.find('select');
 	},
 	methods: {
 		addtag (e) {

@@ -10,6 +10,7 @@
 		    <h2>单图上传</h2>
 		    <input type="file" name="imgFile">
 		    <input type="button" value="提交" @click="upload($event)">
+		    <p v-if='imgUrl'>图片上传地址: {{imgUrl}}</p>
 		</form>
 
 		<Tags :tags='tags' @addtags='addTags'></Tags>
@@ -21,7 +22,6 @@
 <script>
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
-import $ from 'jquery'
 import Tags from './Tags.vue'
 
 var mavonEditor;
@@ -36,7 +36,8 @@ export default {
 			post_author: '',
 			post_content: '',
 			post_title: '',
-			addtags: []
+			addtags: [],
+			imgUrl: ''
 		}
 	},
 	computed: {
@@ -102,20 +103,23 @@ export default {
 			this.addtags = data;
 		},
 		upload (e) {
-			var files = $(e.target).parents('form').find('input[type=file]').prop('files');
+			var self = this;
+			var $file = $(e.target).parents('form').find('input[type=file]');
+			if (!$file.val().trim()) {
+				alert('请选择要上传的文件');
+				return;
+			}
+			var files = $file.prop('files');
 			var data = new FormData();
 			data.append('imgFile', files[0]);
-			$.ajax({
-				url: '/api/upload',
-				type: 'POST',
-				data: data,
+			this.$http.post('/api/upload', data, {
 				cache: false,
 				processData: false,
-				contentType: false,
-				success: function () {
-
-				}
-		  	});
+				contentType: false
+			})
+			.then((res) => {
+				self.imgUrl = res.data;
+			});
 		}
 	}
 }

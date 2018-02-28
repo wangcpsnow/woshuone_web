@@ -4,11 +4,14 @@ import App from './App.vue'
 import store from './vuex/store'
 import router from './router'
 import { sync } from 'vuex-router-sync'
+import axios from 'axios'
 import * as filters from './utils/filters'
 
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
-})
+});
+
+Vue.prototype.$http = axios;
 
 export function createApp () {
     // 同步路由状态(route state)到 store

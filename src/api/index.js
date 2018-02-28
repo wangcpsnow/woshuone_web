@@ -30,7 +30,7 @@ function getFileName (fname, num = 0) {
 		} else {
 			var path = uploadFolder + "/" + name + '(' + num + ')' + suffix;
 		}
-		
+
 		var stat = fs.statSync(path);
 		if (stat) {
 			return getFileName(fname, ++num);
@@ -41,7 +41,7 @@ function getFileName (fname, num = 0) {
 			return fname;
 		} else {
 			return name + '(' + num + ')' + suffix;
-		}	
+		}
 	}
 }
 
@@ -93,6 +93,10 @@ router.post('/api/addterms', function (req, res, next) {
 router.post('/api/upload', upload.single('imgFile'), function (req, res, next) {
 	res.send(imgDomain + filepath);
 })
+
+router.get('/api/test', (req, res, next) => {
+	res.send('test');
+});
 
 router.get('/api/*', function (req, res, next) {
 	var url = req.originalUrl;
