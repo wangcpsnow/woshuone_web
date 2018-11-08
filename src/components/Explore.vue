@@ -56,7 +56,7 @@ export default {
         border: 1px solid #e7eaf1;
         border-radius: 2px;
         box-shadow: 0 1px 3px rgba(0,37,55,.05);
-        overflow: hidden; 
+        overflow: hidden;
 
         .title {
             font-size: 22px;
@@ -68,6 +68,8 @@ export default {
             margin: 10px 0;
             line-height: 1.8em;
             color: #6f6f6f;
+            max-height: 350px;
+            overflow: hidden;
             h1,h2,h3,h4,h5 {
                 margin: 10px 0;
                 color: #333;
