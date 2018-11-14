@@ -6,6 +6,7 @@ import Topics from '../components/Topics.vue'
 import Article from '../components/Article.vue'
 import Admin from '../components/Admin.vue'
 import AddArticle from '../components/AddArticle.vue'
+import Friends from '../components/Friends.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -20,7 +21,8 @@ const router = new VueRouter({
 		{ path: '/article/:id(\\d+)', name: 'article', component: Article },
 		{ path: '/about', component: About },
 		{ path: '/admin', component: Admin },
-		{ path: '/publish', component: AddArticle }
+		{ path: '/publish', component: AddArticle },
+		{ path: '/friends', component: Friends }
 	],
 	scrollBehavior (to, from, savedPosition) {
 		if(savedPosition) {

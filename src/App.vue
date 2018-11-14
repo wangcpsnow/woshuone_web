@@ -9,6 +9,7 @@
                     <router-link to="/">首页</router-link>
                     <router-link to="/explore">发现</router-link>
                     <router-link to="/topics">话题</router-link>
+                    <router-link to="/friends">友链</router-link>
                     <router-link to="/admin" v-if='showAdmin'>后台</router-link>
                 </nav>
             </div>
@@ -147,14 +148,14 @@ export default {
     .view {
         transition: all .5s cubic-bezier(.55,0,.1,1);
     }
-    .slide-left-enter, .slide-right-leave-active {  
-      opacity: 0;  
-      -webkit-transform: translate(30px, 0);  
-      transform: translate(30px, 0);  
+    .slide-left-enter, .slide-right-leave-active {
+      opacity: 0;
+      -webkit-transform: translate(30px, 0);
+      transform: translate(30px, 0);
     }
-    .slide-left-leave-active, .slide-right-enter {  
-      opacity: 0;  
-      -webkit-transform: translate(-30px, 0);  
-      transform: translate(-30px, 0);  
-    }  
+    .slide-left-leave-active, .slide-right-enter {
+      opacity: 0;
+      -webkit-transform: translate(-30px, 0);
+      transform: translate(-30px, 0);
+    }
 </style>
